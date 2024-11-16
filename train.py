@@ -10,12 +10,10 @@ def train():
     # Force CPU usage
     device = torch.device("cpu")
     
-    # Enhanced data augmentation with fixed size
+    # Simplified transforms to maintain batch consistency
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,)),
-        transforms.RandomRotation(10),  # Moved after ToTensor
-        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1))  # Moved after ToTensor
+        transforms.Normalize((0.1307,), (0.3081,))
     ])
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
@@ -25,11 +23,12 @@ def train():
     model = MNISTNet().to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-5)
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', patience=3, factor=0.1)
     
     # Train for 1 epoch with more detailed progress
     model.train()
     running_loss = 0.0
+    total_batches = len(train_loader)
+    
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
@@ -40,9 +39,8 @@ def train():
         
         running_loss += loss.item()
         if batch_idx % 100 == 99:
-            print(f'Batch {batch_idx+1}/{len(train_loader)}, '
+            print(f'Batch {batch_idx+1}/{total_batches}, '
                   f'Loss: {running_loss/100:.4f}')
-            scheduler.step(running_loss/100)
             running_loss = 0.0
     
     # Save model with timestamp
