@@ -30,6 +30,7 @@ ENV/
 data/
 models/
 *.pth
+base/
 
 # IDE specific
 .idea/
