@@ -21,7 +21,7 @@ This project demonstrates a complete CI/CD pipeline for a machine learning proje
 The model is a lightweight CNN with the following architecture:
 - 2 Convolutional layers with max pooling
 - 2 Fully connected layers
-- Total parameters: ~9,898 (optimized for efficiency)
+- Total parameters: ~52,138 (optimized for efficiency)
 
 Architecture details:
 - Input: 28x28 grayscale images
