@@ -21,7 +21,8 @@ def test_model_architecture():
     assert total_params < 100000, f"Model has {total_params} parameters, should be < 100000"
 
 def test_model_accuracy():
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # Force CPU usage
+    device = torch.device("cpu")
     model = MNISTNet().to(device)
     
     # Load the latest model
