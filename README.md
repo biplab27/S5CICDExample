@@ -1,6 +1,6 @@
 # MNIST Neural Network CI/CD Pipeline
 
-![ML Pipeline](https://github.com/<your-username>/S5CICDExample/actions/workflows/ml-pipeline.yml/badge.svg)
+![ML Pipeline](https://github.com/biplab27/S5CICDExample/actions/workflows/ml-pipeline.yml/badge.svg)
 
 This project demonstrates a complete CI/CD pipeline for a machine learning project using GitHub Actions. It includes a simple convolutional neural network (CNN) for MNIST digit classification with automated training, testing, and model validation.
 
